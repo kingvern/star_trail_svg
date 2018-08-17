@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-
+    scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>粒子运动</title>
+    <style>
+    *{
+    margin: 0;
+    padding: 0;
+    }
+    html,body{
+    width: 100%;
+    height: 100%;
+    }
+    canvas{
+    /*width: 100%;
+    height: 100%;*/
+    display: block;
+    /*background-color: #000;*/
+    }
+    #display {position: absolute; top:8; left:8;}
+    @keyframes dash {
+      to {        
+       stroke-dashoffset: 0;
+}
+
+    </style>
+  </head>
+  <body>
+
+<svg xmlns="http://www.w3.org/2000/svg" id="main" version="1.1" >
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#081226;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#0d1936;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#223768;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" id="bg" fill="url(#grad)" />
+</svg>
+
+  </body>
+</body>
+<script>
+
+  function random(min, max) {
+    if (arguments.length < 2) {
+        max = min;
+        min = 0;
+    }
+
+    if (min > max) {
+        var hold = max;
+        max = min;
+        min = hold;
+    }
+
+    return Math.random() * (max - min + 1) + min;
+}
+
+ w = window.innerWeight || document.documentElement.clientWidth || document.body.clientWidth;
+ h = window.innerWeight || document.documentElement.clientHeight || document.body.clientHeight;
+
+       
+    var main = document.getElementById( "main" );
+    main.setAttribute("width", w);
+    main.setAttribute("height",h);
+    var bg = document.getElementById( "bg" );
+    bg.setAttribute("width", w);
+    bg.setAttribute("height",h);
+    for (var i = 0; i < 1500; i++) {
+	      var circle = document.createElementNS( "http://www.w3.org/2000/svg", "circle" );
+	      circle.setAttribute( "cx", w/2 );
+	      circle.setAttribute( "cy", h/3 );
+	      r = Math.sqrt(Math.pow(random(w / 2), 2) + Math.pow(random(h / 3 * 2), 2));
+	      // r = 100;
+	      circle.setAttribute( "r",  r);
+	      c = Math.PI * 2 *r;
+	      o = random(Math.PI * 2 *r);
+	      circle.setAttribute("transform",'rotate('+Math.random()*360+','+w/2 +','+h/3 +')');
+	      circle.setAttribute( "style", 'stroke:hsla(' + random(180, 220) + ', ' + random(30, 70) + '%, ' + random(30, 100) + '%, ' + random(0.5, 1) + ');stroke-width:1;fill:none;stroke-dasharray:'+c+';stroke-dashoffset: '+c+';  animation: dash'+''+'  150s linear infinite; ' );              
+	        main.appendChild( circle );
+    }
+    
+
+</script>
+</html>
